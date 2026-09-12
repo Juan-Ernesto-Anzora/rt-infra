@@ -7,19 +7,22 @@ An ExecPlan is a self-contained implementation plan that a coding agent or a new
 ## Non-negotiable rules
 
 1. Read this file and the repository `AGENTS.md` in full before creating or executing an ExecPlan.
-2. Every ExecPlan must be self-contained. Do not rely on prior chat memory.
-3. Every ExecPlan must explain the user-visible outcome first.
-4. Every ExecPlan must name exact repository-relative files and commands.
-5. Every ExecPlan must contain acceptance criteria and verification steps.
-6. Keep `Progress`, `Surprises & Discoveries`, `Decision Log`, and `Outcomes & Retrospective` updated.
-7. For API or UI contract changes, update OpenAPI or design tokens before implementation.
-8. Run the repo checks listed in `AGENTS.md` before suggesting a commit or PR.
-9. For auth, tenancy, uploads, search SQL, database, permissions, or workflows, include negative tests.
+2. Select and name the active ExecPlan before implementation. Completed or historical plans are evidence, not instructions to restart old work.
+3. Every ExecPlan must be self-contained. Do not rely on prior chat memory.
+4. Every ExecPlan must explain the user-visible outcome first.
+5. Every ExecPlan must name exact repository-relative files and commands that exist, or explicitly mark missing/stale paths as unavailable.
+6. Every ExecPlan must contain acceptance criteria and verification steps.
+7. Keep `Progress`, `Surprises & Discoveries`, `Decision Log`, and `Outcomes & Retrospective` updated.
+8. For API or UI contract changes, update OpenAPI or design tokens before implementation.
+9. Run focused checks during iteration and the required full checks at the PR gate. Rerun checks when later edits or failed checks make reruns meaningful.
+10. Run the repo checks listed in `AGENTS.md` before suggesting a commit or PR, unless tooling is absent from the checkout; in that case, name the missing tool/file and keep the requirement visible.
+11. For auth, tenancy, uploads, search SQL, database, permissions, or workflows, include negative tests.
+12. If blocked by an instruction, name the instruction file and applicable rule, then explain the blocker before asking the user.
 
 ## Where plans live
 
 - Shared standard: `.agent/PLANS.md`
-- Active plans: `docs/plans/sprint-<n>/<feature>-execplan.md`
+- Active plans: `docs/plans/sprint-<n>/<feature>-execplan.md`. The user prompt or branch must select the active plan; unchecked boxes in older plans do not select themselves.
 - Temporary plans: `.agent/tmp/` and must not be committed unless promoted.
 
 ## ExecPlan skeleton

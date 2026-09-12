@@ -85,12 +85,13 @@
 
 ## 12. Agent workflow (how to operate)
 1) Read **this file end-to-end** and the current ticket.  
-2) Propose a short plan with acceptance criteria.  
-3) Update the OpenAPI or design tokens **first** if needed.  
-4) Implement incrementally, write tests as you go.  
-5) Run full lint+test locally.  
-6) Open a small PR with clear title/body and checklist.  
-7) Respond to review feedback and keep the PR up to date with `main`.
+2) Read `.agent/PLANS.md`, select and name the active ExecPlan when required, and treat completed or historical plans as evidence rather than authorization to restart old work.
+3) Propose a short plan with acceptance criteria.
+4) Update the OpenAPI or design tokens **first** if needed.
+5) Implement incrementally, write tests as you go.
+6) Run focused checks during iteration. Run the required full checks at the PR gate, and rerun checks when later edits or failures justify it.
+7) Open a small PR with clear title/body and checklist.
+8) Respond to review feedback and keep the PR up to date with `main`.
 
 ## 13. Ownership
 - See `CODEOWNERS` for paths and required reviewers.
@@ -114,6 +115,15 @@ Before implementation, Codex must read:
 2. `.agent/PLANS.md`
 3. the active ExecPlan for the branch
 4. any repo-specific design/API/token files referenced by the plan
+
+## 16. Codex scope, model, and handoffs
+
+- Finish authorized work end to end. Make routine, reversible choices that fit repository patterns; ask the user only when a material ambiguity changes the outcome or a real permission or managed-control boundary blocks progress.
+- When blocked by an instruction, name the file, quote or summarize the applicable rule, and explain why it applies.
+- Preserve instruction hierarchy, managed controls, explicit user scope, and existing worktree changes. Do not read secret values, add API keys, weaken approval controls, or infer the active model from prose.
+- The checked-in `.codex/config.toml.example` configures Codex development only. It does not add an OpenAI model or API integration to Request Tracker.
+- For GPT-6 Astra work, keep prompts direct about completion, material ambiguity, blocking rules, check scope, and expected output. Do not add repetitive instructions that already exist at a higher-priority layer.
+- Current checked-in infra contents are documentation and repository metadata only. If a plan names `docker-compose.infra.yml`, `.env.infra.example`, `scripts/seed.sh`, package files, app source, or CI workflow files, verify that those files exist in this checkout before treating related commands as runnable.
 
 ---
 
